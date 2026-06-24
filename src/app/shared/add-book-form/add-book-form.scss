@@ -1,0 +1,105 @@
+@use '../../../styles' as *;
+
+.form-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 28px;
+  box-shadow: $card-shadow;
+  max-width: 600px;
+  margin: 0 auto;
+  border: 3px solid rgba($accent-color, 0.3);
+  animation: pop-in 0.5s ease-out both;
+
+  h2 {
+    color: $primary-color;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.8rem;
+  }
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+    color: $text-color;
+    font-size: 1.05rem;
+  }
+}
+
+.required {
+  color: $secondary-color;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.9rem 1.1rem;
+  border: 3px solid #e8edf8;
+  border-radius: 16px;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 600;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+  background-color: #fafbff;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    background-color: white;
+    box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.12);
+    transform: scale(1.01);
+  }
+}
+
+textarea {
+  resize: vertical;
+}
+
+.error-msg {
+  display: block;
+  color: $secondary-color;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-top: 0.4rem;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 1.1rem;
+  background: linear-gradient(135deg, $accent-color, $sky-blue);
+  color: white;
+  border: none;
+  border-radius: 18px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease;
+  box-shadow: 0 8px 20px rgba(67, 233, 123, 0.35);
+
+  &:hover:not(:disabled) {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 28px rgba(67, 233, 123, 0.45);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    background: #a0aec0;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+}

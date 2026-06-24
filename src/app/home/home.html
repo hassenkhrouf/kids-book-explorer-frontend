@@ -1,0 +1,80 @@
+<div class="home-container" *ngIf="state$ | async as state">
+
+    <header class="hero">
+        <div class="hero-deco" aria-hidden="true">
+            <span>🦄</span>
+            <span>📚</span>
+            <span>🚀</span>
+        </div>
+        <h1>Kids Book Explorer</h1>
+        <p>Discover amazing stories, magical adventures, and learn new things!</p>
+    </header>
+
+    <div class="actions-bar">
+        <!-- SEARCH BAR -->
+        <div class="search-container">
+            <input type="text" placeholder="Search for a book title..." [(ngModel)]="searchTerm" (input)="onSearch()"
+                class="search-input">
+        </div>
+
+        <!-- ADD BOOK BUTTON -->
+        <button class="admin-btn" (click)="toggleForm()">
+            {{ showForm ? '✖ Close' : '➕ Add New Book' }}
+        </button>
+    </div>
+
+    <!-- ADD BOOK FORM (Only shows if showForm is true) -->
+    <div class="form-wrapper" *ngIf="showForm">
+        <app-add-book-form (bookAdded)="onBookAdded()"></app-add-book-form>
+    </div>
+
+    <!-- LOADING STATE (Shows while waiting for Spring Boot) -->
+    <div class="loading-state" *ngIf="state.loading">
+        <div class="spinner"></div>
+        <h3>Fetching amazing books...</h3>
+    </div>
+
+    <!-- BOOK GRID -->
+    <div class="book-grid" *ngIf="!state.loading && state.books.length > 0; else noBooks">
+
+        <div class="book-card" *ngFor="let book of getPaginatedBooks(state.books)">
+
+            <div class="card-image">
+                <img [src]="book.imageUrl" [alt]="book.title">
+                <span class="category-badge">{{ book.category }}</span>
+            </div>
+
+            <div class="card-body">
+                <h3>{{ book.title }}</h3>
+                <p>{{ book.description }}</p>
+                <a routerLink [routerLink]="['/reader', book.id]" class="read-btn">Read Story ✨</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Show this ONLY if loading is done AND the array is empty -->
+    <ng-template #noBooks>
+        <div class="no-results" *ngIf="!state.loading">
+            <h2>😢 No books found!</h2>
+            <p>Try a different search word.</p>
+        </div>
+    </ng-template>
+
+    <!-- PAGINATION CONTROLS -->
+    <div class="pagination" *ngIf="!state.loading && getTotalPages(state.books) > 1">
+        <button class="page-btn" (click)="goPrev()" [disabled]="currentPage === 1">⬅ Prev</button>
+
+        <div class="page-numbers">
+            <span *ngFor="let page of [].constructor(getTotalPages(state.books)); let i = index" class="page-number"
+                [class.active]="currentPage === i + 1" (click)="goToPage(i + 1)">
+                {{ i + 1 }}
+            </span>
+        </div>
+
+        <button class="page-btn" (click)="goNext(getTotalPages(state.books))"
+            [disabled]="currentPage === getTotalPages(state.books)">Next ➡</button>
+    </div>
+
+</div>

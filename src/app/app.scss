@@ -1,0 +1,163 @@
+@use '../styles' as *;
+
+.app-wrapper {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+// Floating background decorations
+.sky-decorations {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.deco {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.55;
+  user-select: none;
+
+  &--cloud-1 {
+    top: 12%;
+    left: 5%;
+    font-size: 3.5rem;
+    animation: float-slow 8s ease-in-out infinite;
+  }
+
+  &--cloud-2 {
+    top: 22%;
+    right: 8%;
+    font-size: 2.8rem;
+    animation: float-slow 10s ease-in-out infinite 1s;
+  }
+
+  &--star-1 {
+    top: 18%;
+    left: 42%;
+    animation: float 5s ease-in-out infinite;
+  }
+
+  &--star-2 {
+    top: 55%;
+    right: 12%;
+    animation: float 6s ease-in-out infinite 0.5s;
+  }
+
+  &--star-3 {
+    bottom: 20%;
+    left: 10%;
+    animation: float 7s ease-in-out infinite 1.5s;
+  }
+
+  &--rainbow {
+    bottom: 8%;
+    right: 6%;
+    font-size: 2.5rem;
+    animation: wiggle 4s ease-in-out infinite;
+  }
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 2rem;
+  margin: 1rem 1.5rem 0;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 32px rgba(108, 99, 255, 0.12);
+  position: sticky;
+  top: 1rem;
+  z-index: 1000;
+  animation: slide-down 0.6s ease-out both;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &:hover {
+    transform: scale(1.04);
+
+    .logo-icon {
+      animation: wiggle 0.5s ease-in-out;
+    }
+  }
+}
+
+.logo-icon {
+  font-size: 2.2rem;
+  display: inline-block;
+}
+
+.logo-text {
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, $primary-color, $secondary-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #5a6785;
+  font-weight: 800;
+  font-size: 1.05rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: $radius-bubble;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    background: #f0f4ff;
+    color: $primary-color;
+    transform: translateY(-2px);
+  }
+}
+
+.active-link {
+  background: linear-gradient(135deg, $primary-color, #8b83ff) !important;
+  color: white !important;
+  box-shadow: 0 6px 18px rgba(108, 99, 255, 0.4) !important;
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+.main-content {
+  padding-top: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.8rem;
+    margin: 0.75rem;
+    padding: 1rem;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,45 @@
+<div class="reader-container" *ngIf="readerVm$ | async as vm; else loading">
+
+    <div class="reader-header">
+        <!-- RouterLink with just '/' acts as a "Back to Home" button -->
+        <a routerLink="/" class="back-btn">← Back to Books</a>
+        <span class="category-badge">{{ vm.book.category }}</span>
+    </div>
+
+    <div class="reader-content">
+        <h1>{{ vm.book.title }}</h1>
+
+        <div class="divider"></div>
+
+        <p class="page-counter">Page {{ vm.pageIndex + 1 }} of {{ vm.totalPages }}</p>
+
+        <div class="story-page">
+            <div class="story-text">{{ vm.currentPageText }}</div>
+        </div>
+
+        <div class="reader-controls">
+            <button class="nav-arrow" (click)="goPrev()" [disabled]="vm.pageIndex === 0" aria-label="Previous page">
+                ⬅
+            </button>
+
+            <div class="page-dots" *ngIf="vm.totalPages > 1">
+                <button *ngFor="let _ of vm.pages; let i = index" class="page-dot" [class.active]="vm.pageIndex === i"
+                    (click)="jumpToPage(i)" [attr.aria-label]="'Go to page ' + (i + 1)"></button>
+            </div>
+
+            <button class="nav-arrow" (click)="goNext(vm.totalPages)" [disabled]="vm.pageIndex === vm.totalPages - 1"
+                aria-label="Next page">
+                ➡
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<!-- Shows a friendly loading message while the book is fetching -->
+<ng-template #loading>
+    <div class="loading-container">
+        <div class="spinner"></div>
+        <h2>Opening your magical book...</h2>
+    </div>
+</ng-template>
