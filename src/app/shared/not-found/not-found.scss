@@ -1,0 +1,58 @@
+@use '../../../styles' as *;
+
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  text-align: center;
+  padding: 2rem;
+  animation: pop-in 0.6s ease-out both;
+}
+
+.emoji {
+  font-size: 8rem;
+  margin-bottom: 1rem;
+  animation: bounce-gentle 2s ease-in-out infinite;
+  display: inline-block;
+}
+
+h1 {
+  font-size: clamp(3rem, 8vw, 4.5rem);
+  background: linear-gradient(135deg, $secondary-color, $peach);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.9rem;
+  color: $text-color;
+  margin: 0.5rem 0;
+}
+
+p {
+  color: #718096;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.home-btn {
+  background: linear-gradient(135deg, $primary-color, #8b83ff);
+  color: white;
+  text-decoration: none;
+  padding: 1rem 2.2rem;
+  border-radius: $radius-bubble;
+  font-size: 1.2rem;
+  font-weight: 800;
+  box-shadow: 0 8px 22px rgba(108, 99, 255, 0.4);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 12px 28px rgba(108, 99, 255, 0.5);
+  }
+}

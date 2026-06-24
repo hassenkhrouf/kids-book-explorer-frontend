@@ -1,0 +1,134 @@
+@use '../../styles' as *;
+
+.home-container {
+  @extend .page-container;
+}
+
+.actions-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  animation: pop-in 0.6s ease-out 0.15s both;
+}
+
+.search-container {
+  flex: 1;
+  max-width: 600px;
+  position: relative;
+
+  &::before {
+    content: '🔍';
+    position: absolute;
+    left: 1.3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.3rem;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem 1.5rem 1rem 3.2rem;
+  font-size: 1.15rem;
+  font-family: inherit;
+  font-weight: 600;
+  border: 3px solid #e8edf8;
+  border-radius: $radius-bubble;
+  outline: none;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.2s ease;
+  background-color: white;
+  box-shadow: 0 4px 16px rgba(108, 99, 255, 0.08);
+
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 5px rgba(108, 99, 255, 0.15);
+    transform: scale(1.01);
+  }
+
+  &::placeholder {
+    color: #a0aec0;
+  }
+}
+
+.admin-btn {
+  @extend .bubble-btn;
+}
+
+.form-wrapper {
+  margin-bottom: 3rem;
+  animation: slide-down 0.4s ease-out forwards;
+}
+
+.no-results {
+  text-align: center;
+  padding: 4rem 2rem;
+  animation: pop-in 0.5s ease-out both;
+
+  h2 {
+    font-size: 2.2rem;
+    animation: wiggle 2s ease-in-out infinite;
+  }
+
+  p {
+    color: #718096;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-bottom: 2rem;
+  animation: pop-in 0.5s ease-out 0.3s both;
+}
+
+.page-btn {
+  @extend .bubble-btn;
+  padding: 0.65rem 1.3rem;
+  font-size: 1rem;
+}
+
+.page-numbers {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.page-number {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: $text-color;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  &:hover {
+    transform: scale(1.15) rotate(-3deg);
+    background: #f0f4ff;
+    color: $primary-color;
+  }
+
+  &.active {
+    background: linear-gradient(135deg, $primary-color, #8b83ff);
+    color: white;
+    box-shadow: 0 6px 16px rgba(108, 99, 255, 0.4);
+    transform: scale(1.1);
+  }
+}

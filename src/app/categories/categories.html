@@ -1,0 +1,42 @@
+<div class="categories-container">
+
+    <header class="hero">
+        <div class="hero-deco" aria-hidden="true">
+            <span>🧚</span>
+            <span>📚</span>
+            <span>🎨</span>
+        </div>
+        <h1>Book Categories</h1>
+        <p>Choose a category to find your next favorite story!</p>
+    </header>
+
+    <!-- Category Buttons -->
+    <div class="btn-group">
+        <button class="category-btn" [class.active]="selectedCategory === ''" (click)="showAll()">
+            All Books ✨
+        </button>
+
+        <button *ngFor="let cat of categoryList" class="category-btn" [class.active]="selectedCategory === cat"
+            (click)="selectCategory(cat)">
+            {{ cat }}
+        </button>
+    </div>
+
+    <!-- Book Grid (Reusing the exact same card design from the Home page) -->
+    <div class="book-grid" *ngIf="books$ | async as books">
+
+        <div class="book-card" *ngFor="let book of books">
+            <div class="card-image">
+                <img [src]="book.imageUrl" [alt]="book.title">
+                <span class="category-badge">{{ book.category }}</span>
+            </div>
+            <div class="card-body">
+                <h3>{{ book.title }}</h3>
+                <p>{{ book.description }}</p>
+                <a routerLink [routerLink]="['/reader', book.id]" class="read-btn">Read Story ✨</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
