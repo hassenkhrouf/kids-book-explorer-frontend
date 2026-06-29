@@ -1,6 +1,7 @@
 {
   "/api": {
-    "target": "http://localhost:8080",
-    "secure": false
+    "target": "https://kids-book-explorer-backend-production.up.railway.app",
+    "secure": true,
+    "changeOrigin": true
   }
 }
